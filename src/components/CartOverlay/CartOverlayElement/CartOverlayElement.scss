@@ -1,0 +1,43 @@
+.cart-overlay-element-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 26px 0 39px 0;
+}
+
+.cart-overlay-element-image {
+  width: 105px;
+  height: 137px;
+}
+
+.cart-overlay-info {
+  width: 136px;
+
+  h4 {
+    margin: 5px 16px 0 0;
+    font-weight: 300;
+    line-height: 1.5;
+  }
+
+  p {
+    margin-top: 10px;
+  }
+}
+
+.cart-overlay-element-attributes {
+  display: flex;
+}
+
+.cart-overlay-amount {
+  margin-left: 9px;
+
+  svg {
+    cursor: pointer;
+  }
+
+  div {
+    padding-left: 9px;
+    margin: 30px 0 35px 0;
+    font-weight: 500;
+    font-size: 16px;
+  }
+}

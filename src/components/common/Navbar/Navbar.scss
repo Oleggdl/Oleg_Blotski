@@ -1,0 +1,74 @@
+
+.category-header {
+  display: flex;
+  margin: 0 auto;
+  max-width: 1240px;
+}
+
+.category-nav {
+  height: 80px;
+
+  ul {
+    display: flex;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+
+    .category-link {
+      padding: 0 17px;
+      list-style-type: none;
+      cursor: pointer;
+      line-height: 4.7;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: .3s;
+      box-sizing: border-box;
+      border-bottom: 2px #ffffff solid;
+      color: #1d1f22;
+      font-weight: 400;
+      font-size: 16px;
+
+      &:hover {
+        border-bottom: 2px #5ece7b solid;
+        color: #5ece7b;
+        font-weight: 600;
+      }
+    }
+
+    .active-link {
+      border-bottom: 2px #5ece7b solid;
+      color: #5ece7b;
+      font-weight: 600;
+    }
+  }
+}
+
+.storefront-logo {
+  width: 41px;
+  height: 41px;
+  margin: 19.5px auto;
+}
+
+.header-actions {
+  position: relative;
+  display: flex;
+}
+
+.dollar-icon {
+  padding-top: 28px;
+}
+
+.arrow-down-icon {
+  padding-top: 30px;
+}
+
+.cart-icon {
+  width: 40px;
+  height: 100%;
+  cursor: pointer;
+
+  svg {
+    padding-left: 2px;
+    margin: 32px 10px 0 10px;
+  }
+}
