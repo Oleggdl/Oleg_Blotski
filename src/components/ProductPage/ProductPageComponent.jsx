@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 import './ProductPage.scss'
+import ProductGalleryContainer from "./MainImgSlider/ProductGalleryContainer"
+import ProductAttributesContainer from "./ProductAttributes/ProductAttributesContainer";
 
 class ProductPageComponent extends Component {
 
@@ -9,29 +11,20 @@ class ProductPageComponent extends Component {
         return (
             <>
                 <div className="product-page-container">
-                    <div className="product-gallery">
-                        {this.props.currentProduct.gallery && this.props.currentProduct.gallery.map((img, index) =>
-                            <div key={index}>
-                                <img src={img} alt="product image"/>
-                            </div>)}
-                    </div>
-                    <div className="product-main-image">
-                        <img src={this.props.currentProduct.gallery && this.props.currentProduct.gallery[0]}
-                             alt="main product image"/>
-                    </div>
+                    <ProductGalleryContainer currentProduct={this.props.currentProduct}/>
                     <div className="product-page-info">
                         <h2>{this.props.currentProduct.brand}</h2>
                         <p className="product-name">{this.props.currentProduct.name}</p>
-                        <h3>Size:</h3>
-                        <div className="product-page-attributes">
-                            <div>XS</div>
-                            <div>S</div>
-                            <div>M</div>
-                            <div>L</div>
-                        </div>
+                        {this.props.currentProduct.attributes && this.props.currentProduct.attributes.map(attribute =>
+                            <ProductAttributesContainer key={attribute.id} attribute={attribute}
+                                                        attributes={this.props.attributes}
+                                                        selectAttributeHandler={this.props.selectAttributeHandler}/>)}
                         <h3>Price:</h3>
-                        <p className="product-price">$50.00</p>
-                        <button onClick={this.props.addToCartHandler}>Add to cart</button>
+                        <p className="product-price">{this.props.currentCurrency.symbol}{this.props.currentPrice}</p>
+                        <button disabled={!this.props.isAllAttributesFill} onClick={this.props.addToCartHandler}
+                                className={!this.props.isAllAttributesFill ? 'disabled-add-to-cart' : ''}>
+                            Add to cart
+                        </button>
                         <p className="product-page-description">{this.props.currentProduct.description}</p>
                     </div>
                 </div>

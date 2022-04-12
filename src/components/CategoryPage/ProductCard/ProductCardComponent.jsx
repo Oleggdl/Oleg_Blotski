@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import './ProductCard.scss'
 import SvgSelector from "../../common/SvgSelector"
-import {NavLink} from "react-router-dom";
+import {NavLink} from "react-router-dom"
 
 class ProductCardComponent extends Component {
 
@@ -19,7 +19,7 @@ class ProductCardComponent extends Component {
                         </div>
                         <div className="product-card-content">
                             <h4>{this.props.product.name}</h4>
-                            <p>$50.00</p>
+                            <p>{this.props.currentCurrency.symbol}{this.props.currentPrice}</p>
                         </div>
                     </div>
                 </NavLink>

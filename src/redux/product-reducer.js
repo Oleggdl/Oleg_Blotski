@@ -45,10 +45,28 @@ export const getProducts = (category) => {
                           title: "${category}"
                         }){
                            name
-                           products{
-                             id
+                           products {
+                            id
                              name
                              gallery
+                             prices {
+                                 currency {
+                                     label
+                                 }
+                                 amount
+                             }
+                             brand
+                             description
+                             attributes{
+                                 id
+                                 name
+                                 type
+                                 items{
+                                    displayValue
+                                    value
+                                    id
+                                 }
+                             }
                            }
                         }
                     }
@@ -70,7 +88,24 @@ export const getAllProducts = () => {
                              id
                              name
                              gallery
+                             prices {
+                                 currency {
+                                     label
+                                 }
+                                 amount
+                             }
                              brand
+                             description
+                             attributes{
+                                 id
+                                 name
+                                 type
+                                 items{
+                                    displayValue
+                                    value
+                                    id
+                                 }
+                             }
                            }
                         }
                     }

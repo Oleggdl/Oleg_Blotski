@@ -10,7 +10,32 @@ class ProductCardContainer extends Component {
         super(props)
         this.currentProductHandler = this.currentProductHandler.bind(this)
         this.addToCartHandler = this.addToCartHandler.bind(this)
+        this.state = {
+            currentPrice: null
+        }
 
+    }
+
+    componentDidMount() {
+        for (let price of this.props.product.prices) {
+            if (price.currency.label === this.props.currentCurrency.label) {
+                this.setState({
+                    currentPrice: price.amount
+                })
+            }
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.currentCurrency !== prevProps.currentCurrency) {
+            for (let price of this.props.product.prices) {
+                if (price.currency.label === this.props.currentCurrency.label) {
+                    this.setState({
+                        currentPrice: price.amount
+                    })
+                }
+            }
+        }
     }
 
     currentProductHandler() {
@@ -25,12 +50,18 @@ class ProductCardContainer extends Component {
         return (
             <>
                 <ProductCardComponent product={this.props.product} currentProductHandler={this.currentProductHandler}
-                                      addToCartHandler={this.addToCartHandler}/>
+                                      addToCartHandler={this.addToCartHandler} currentPrice={this.state.currentPrice}
+                                      currentCurrency={this.props.currentCurrency}
+                />
             </>
         )
     }
 }
 
+const mapStateToProps = (state) => ({
+    currentCurrency: state.navbarReducer.currentCurrency
+})
+
 export default compose(
-    connect(null, {setCurrentProduct})
+    connect(mapStateToProps, {setCurrentProduct})
 )(ProductCardContainer)

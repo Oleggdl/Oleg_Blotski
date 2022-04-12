@@ -1,3 +1,4 @@
+@import "src/styles/mixins";
 
 .category-header {
   display: flex;
@@ -54,12 +55,22 @@
   display: flex;
 }
 
-.dollar-icon {
-  padding-top: 28px;
-}
+.currency-icons {
 
-.arrow-down-icon {
-  padding-top: 30px;
+  position: relative;
+  margin-right: 5px;
+  padding: 0 5px;
+  cursor: pointer;
+
+  @include disabled-selection;
+
+  .currency-icon {
+    display: inline-block;
+    padding-top: 32px;
+    padding-right: 10px;
+    font-weight: 500;
+    font-size: 18px;
+  }
 }
 
 .cart-icon {
@@ -67,8 +78,59 @@
   height: 100%;
   cursor: pointer;
 
+  @include disabled-selection;
+
   svg {
+    width: 22px;
+    height: 22px;
     padding-left: 2px;
     margin: 32px 10px 0 10px;
+  }
+}
+
+.cart-product-count {
+  position: absolute;
+  top: 23px;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  padding-top: 2px;
+  text-align: center;
+  border-radius: 50%;
+  background-color: #1d1f22;
+  color: #ffffff;
+  font-size: 14px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+}
+
+.currencies-container {
+  position: absolute;
+  z-index: 3;
+  top: 65px;
+  left: -16px;
+  width: 114px;
+  padding: 20px 0 0 0;
+  box-shadow: 0 4px 35px 0 rgba(168, 172, 176, 0.19);
+
+
+  div {
+    margin-bottom: 21px;
+    padding: 4px 21px;
+    cursor: pointer;
+    transition: .3s;
+    font-weight: 500;
+    font-size: 18px;
+    color: #1d1f22;
+
+    span {
+      padding-right: 5px;
+    }
+
+    &:hover {
+      font-weight: 700;
+      background-color: #5ece7b;
+      color: #ffffff;
+    }
   }
 }

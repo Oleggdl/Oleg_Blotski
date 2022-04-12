@@ -9,24 +9,89 @@ class ProductPageContainer extends Component {
     constructor(props) {
         super(props)
         this.addToCartHandler = this.addToCartHandler.bind(this)
+        this.selectAttributeHandler = this.selectAttributeHandler.bind(this)
+        this.state = {
+            currentPrice: null,
+            attributes: {
+                'Color': null,
+                'Capacity': null,
+                'With USB 3 ports': null,
+                'Touch ID in keyboard': null,
+                'Size': null
+            },
+            isAllAttributesFill: false
+        }
+    }
+
+    componentDidMount() {
+        for (let price of this.props.currentProduct?.prices) {
+            if (price.currency.label === this.props.currentCurrency.label) {
+                this.setState({
+                    currentPrice: price.amount
+                })
+            }
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.state.attributes !== prevState.attributes) {
+            let numberOfSelected = 0
+            for (let key in this.state.attributes) {
+                if (!!this.state.attributes[key]) {
+                    numberOfSelected++
+                }
+            }
+            if (numberOfSelected === this.props.currentProduct.attributes.length) {
+                this.setState({
+                    isAllAttributesFill: true
+                })
+            } else {
+                this.setState({
+                    isAllAttributesFill: false
+                })
+            }
+        }
+
+        //todo
+        if (this.props.currentProduct !== prevProps.currentProduct
+            || this.props.currentCurrency !== prevProps.currentCurrency) {
+            for (let price of this.props.currentProduct?.prices) {
+                if (price.currency.label === this.props.currentCurrency.label) {
+                    console.log('test')
+                    this.setState({
+                        currentPrice: price.amount
+                    })
+                }
+            }
+        }
     }
 
     addToCartHandler() {
         this.props.addProductToCart(this.props.currentProduct)
     }
 
+    selectAttributeHandler(id, value) {
+        this.setState({
+            attributes: {...this.state.attributes, [id]: value}
+        })
+    }
+
     render() {
         return (
             <>
-                <ProductPageComponent currentProduct={this.props.currentProduct}
-                                      addToCartHandler={this.addToCartHandler}/>
+                <ProductPageComponent currentProduct={this.props.currentProduct} currentPrice={this.state.currentPrice}
+                                      currentCurrency={this.props.currentCurrency} attributes={this.state.attributes}
+                                      addToCartHandler={this.addToCartHandler}
+                                      selectAttributeHandler={this.selectAttributeHandler}
+                                      isAllAttributesFill={this.state.isAllAttributesFill}/>
             </>
         )
     }
 }
 
 const mapStateToProps = (state) => ({
-    currentProduct: state.productReducer.currentProduct
+    currentProduct: state.productReducer.currentProduct,
+    currentCurrency: state.navbarReducer.currentCurrency
 })
 
 export default compose(

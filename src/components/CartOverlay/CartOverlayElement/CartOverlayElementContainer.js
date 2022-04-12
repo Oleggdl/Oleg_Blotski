@@ -1,9 +1,10 @@
 import React, {Component} from 'react'
-import CartElementComponent from "./CartElementComponent"
+import CartOverlayElement from "./CartOverlayElement"
 import {compose} from "redux"
 import {connect} from "react-redux"
+import {addProductToCart} from "../../../redux/cart-reducer"
 
-class CartElementContainer extends Component {
+class CartOverlayElementContainer extends Component {
 
     constructor(props) {
         super(props)
@@ -40,7 +41,6 @@ class CartElementContainer extends Component {
     }
 
     increaseAmount() {
-        console.log('test')
         if (this.state.productAmount <= 9) {
             this.setState({
                 productAmount: this.state.productAmount + 1
@@ -56,17 +56,14 @@ class CartElementContainer extends Component {
         }
     }
 
-
-
     render() {
         return (
             <>
-                <CartElementComponent product={this.props.product} currentCurrency={this.props.currentCurrency}
-                                      currentPrice={this.state.currentPrice}
-                                      productAmount={this.state.productAmount}
-                                      increaseAmount={this.increaseAmount}
-                                      decreaseAmount={this.decreaseAmount}
-
+                <CartOverlayElement product={this.props.product} currentPrice={this.state.currentPrice}
+                                    currentCurrency={this.props.currentCurrency}
+                                    productAmount={this.state.productAmount}
+                                    increaseAmount={this.increaseAmount}
+                                    decreaseAmount={this.decreaseAmount}
                 />
             </>
         )
@@ -74,9 +71,11 @@ class CartElementContainer extends Component {
 }
 
 const mapStateToProps = (state) => ({
+    currentProduct: state.productReducer.currentProduct,
     currentCurrency: state.navbarReducer.currentCurrency
 })
 
 export default compose(
-    connect(mapStateToProps, {})
-)(CartElementContainer)
+    connect(mapStateToProps, {addProductToCart})
+)(CartOverlayElementContainer)
+
