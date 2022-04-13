@@ -6,6 +6,8 @@ class CartOverlayElement extends Component {
 
 
     render() {
+
+        // console.log(this.props.productAmount)
         return (
             <>
                 <div className="cart-overlay-element-container">
@@ -22,7 +24,7 @@ class CartOverlayElement extends Component {
                     </div>
                     <div className="cart-overlay-amount">
                         <div onClick={this.props.increaseAmount}><SvgSelector svgName="plus-square-icon"/></div>
-                        <div className="product-amount">{this.props.productAmount}</div>
+                        <div className="product-amount">{this.props.productAmount[this.props.product.id]}</div>
                         <div onClick={this.props.decreaseAmount}><SvgSelector svgName="minus-square-icon"/></div>
                     </div>
                     <div className="cart-overlay-element-image">
