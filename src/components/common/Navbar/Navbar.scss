@@ -58,9 +58,11 @@
 .currency-icons {
 
   position: relative;
+  min-width: 52px;
   margin-right: 5px;
   padding: 0 5px;
   cursor: pointer;
+  text-align: right;
 
   @include disabled-selection;
 
@@ -111,6 +113,7 @@
   left: -16px;
   width: 114px;
   padding: 20px 0 0 0;
+  background-color: #ffffff;
   box-shadow: 0 4px 35px 0 rgba(168, 172, 176, 0.19);
 
 

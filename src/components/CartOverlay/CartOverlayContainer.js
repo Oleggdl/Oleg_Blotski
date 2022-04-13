@@ -14,30 +14,6 @@ class CartOverlayContainer extends Component {
         this.viewBagHandler = this.viewBagHandler.bind(this)
     }
 
-    componentDidMount() {
-
-        // console.log(this.props.cart)
-        // for (let price of this.props.product.prices) {
-        //     if (price.currency.label === this.props.currentCurrency.label) {
-        //         this.setState({
-        //             currentPrice: price.amount
-        //         })
-        //     }
-        // }
-    }
-
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        // if (this.props.currentCurrency !== prevProps.currentCurrency) {
-        //     for (let price of this.props.product.prices) {
-        //         if (price.currency.label === this.props.currentCurrency.label) {
-        //             this.setState({
-        //                 currentPrice: price.amount
-        //             })
-        //         }
-        //     }
-        // }
-    }
-
     viewBagHandler() {
         this.props.setIsCartOverlay(false)
     }

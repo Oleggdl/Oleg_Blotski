@@ -4,84 +4,65 @@ import {compose} from "redux"
 import {connect} from "react-redux"
 import {getProducts} from "../../../redux/product-reducer"
 import {getCategories} from "../../../redux/category-reducer"
-import {getCurrencies, setCurrentCurrency, setIsCartOverlay} from "../../../redux/navbar-reducer"
+import {getCurrencies, setCurrentCurrency, setIsCartOverlay, setIsCurrencyMenu} from "../../../redux/navbar-reducer"
 
 class NavbarContainer extends Component {
 
     constructor(props) {
         super(props)
         this.onCartOverlayHandler = this.onCartOverlayHandler.bind(this)
-        this.state = {
-            isCurrencyOpen: false
-        }
         this.currencyRef = React.createRef()
+        this.currencyBtnRef = React.createRef()
         this.cartContainer = React.createRef()
+        this.cartBtnRef = React.createRef()
 
-        this.setIsCurrencyOpen = this.setIsCurrencyOpen.bind(this)
         this.currentCurrencyHandler = this.currentCurrencyHandler.bind(this)
-    }
-
-    setIsCurrencyOpen() {
-        !!this.state.isCurrencyOpen ? this.setState({
-            isCurrencyOpen: false
-        }) : this.setState({
-            isCurrencyOpen: true
-        })
+        this.isCurrencyMenuHandler = this.isCurrencyMenuHandler.bind(this)
     }
 
     componentDidMount() {
         this.props.getCategories()
         this.props.getCurrencies()
 
-        // window.addEventListener('click', (e) => {
-        //         if (this.currencyRef.current) {
-        //             if (e.target !== this.currencyRef.current) {
-        //                 // this.setState({
-        //                 //     isCurrencyOpen: false
-        //                 // })
-        //                 // console.log(e.target)
-        //             }
-        //         }
-        //     }
-        // )
-
         if (this.cartContainer) {
             window.addEventListener('mousedown', (e) => {
                     if (this.cartContainer.current) {
-                        if (!this.cartContainer.current.contains(e.target)) {
+                        if (!this.cartContainer.current.contains(e.target)
+                            && !this.cartBtnRef.current.contains(e.target)) {
                             this.props.setIsCartOverlay(false)
                         }
                     }
                 }
             )
         }
-
-
+        if (this.currencyRef) {
+            window.addEventListener('mousedown', (e) => {
+                    if (this.currencyRef.current) {
+                        if (!this.currencyRef.current.contains(e.target)
+                            && !this.currencyBtnRef.current.contains(e.target)) {
+                            this.props.setIsCurrencyMenu(false)
+                        }
+                    }
+                }
+            )
+        }
     }
 
-    // componentDidUpdate(prevProps, prevState, snapshot) {
-    //     if (this.props.isCartOverlay !== prevProps.isCartOverlay) {
-    //
-    //     }
-    //
-    // }
-
-    componentWillUnmount() {//todo
-        // window.removeEventListener('click', (e) => {
-        //     if (this.currencyRef.current) {
-        //         if (e.target !== this.currencyRef.current) {
-        //             // this.setState({
-        //             //     isCurrencyOpen: false
-        //             // })
-        //             // console.log(e.target)
-        //         }
-        //     }
-        // })
-
+    componentWillUnmount() {
         window.removeEventListener('mousedown', (e) => {
                 if (this.cartContainer.current) {
-                    if (!this.cartContainer.current.contains(e.target)) {
+                    if (!this.cartContainer.current.contains(e.target)
+                        && !this.cartBtnRef.current.contains(e.target)) {
                         this.props.setIsCartOverlay(false)
+                    }
+                }
+            }
+        )
+        window.removeEventListener('mousedown', (e) => {
+                if (this.currencyRef.current) {
+                    if (!this.currencyRef.current.contains(e.target)
+                        && !this.currencyBtnRef.current.contains(e.target)) {
+                        this.props.setIsCurrencyMenu(false)
                     }
                 }
             }
@@ -98,9 +79,11 @@ class NavbarContainer extends Component {
 
     currentCurrencyHandler(currentCurrency) {
         this.props.setCurrentCurrency(currentCurrency)
-        this.setState({
-            isCurrencyOpen: false
-        })
+        this.props.isCurrencyMenu ? this.props.setIsCurrencyMenu(false) : this.props.setIsCurrencyMenu(true)
+    }
+
+    isCurrencyMenuHandler() {
+        this.props.isCurrencyMenu ? this.props.setIsCurrencyMenu(false) : this.props.setIsCurrencyMenu(true)
     }
 
 
@@ -110,10 +93,12 @@ class NavbarContainer extends Component {
                 <NavbarComponent categories={this.props.categories} setCategory={this.setCategory}
                                  state={this.state} onCartOverlayHandler={this.onCartOverlayHandler}
                                  isCartOverlay={this.props.isCartOverlay} currencies={this.props.currencies}
-                                 setIsCurrencyOpen={this.setIsCurrencyOpen} isCurrencyOpen={this.state.isCurrencyOpen}
+                                 isCurrencyMenu={this.props.isCurrencyMenu} cartBtnRef={this.cartBtnRef}
                                  currencyRef={this.currencyRef} currentCurrencyHandler={this.currentCurrencyHandler}
                                  currentCurrency={this.props.currentCurrency} cart={this.props.cart}
-                                 cartContainer={this.cartContainer}/>
+                                 cartContainer={this.cartContainer} currencyBtnRef={this.currencyBtnRef}
+                                 isCurrencyMenuHandler={this.isCurrencyMenuHandler}
+                />
             </>
         )
     }
@@ -122,11 +107,15 @@ class NavbarContainer extends Component {
 const mapStateToProps = (state) => ({
     categories: state.categoryReducer.categories,
     isCartOverlay: state.navbarReducer.isCartOverlay,
+    isCurrencyMenu: state.navbarReducer.isCurrencyMenu,
     currencies: state.navbarReducer.currencies,
     currentCurrency: state.navbarReducer.currentCurrency,
     cart: state.cartReducer.cart
 })
 
 export default compose(
-    connect(mapStateToProps, {getCategories, getProducts, setIsCartOverlay, getCurrencies, setCurrentCurrency})
+    connect(mapStateToProps, {
+        getCategories, getProducts, setIsCartOverlay, getCurrencies, setCurrentCurrency,
+        setIsCurrencyMenu
+    })
 )(NavbarContainer)

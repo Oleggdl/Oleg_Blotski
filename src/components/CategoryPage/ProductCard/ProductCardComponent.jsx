@@ -18,7 +18,7 @@ class ProductCardComponent extends Component {
                             <SvgSelector svgName="circle-cart-icon" onClick={this.props.addToCartHandler}/>
                         </div>
                         <div className="product-card-content">
-                            <h4>{this.props.product.brand} {this.props.product.name}</h4>
+                            <h4>{this.props.product.name}</h4>
                             <p>{this.props.currentCurrency.symbol}{this.props.currentPrice}</p>
                         </div>
                     </div>
