@@ -3,7 +3,7 @@ import NavbarComponent from "./NavbarComponent"
 import {compose} from "redux"
 import {connect} from "react-redux"
 import {getProducts} from "../../../redux/product-reducer"
-import {getCategories} from "../../../redux/category-reducer"
+import {getCategories, setCurrentCategory} from "../../../redux/category-reducer"
 import {getCurrencies, setCurrentCurrency, setIsCartOverlay, setIsCurrencyMenu} from "../../../redux/navbar-reducer"
 
 class NavbarContainer extends Component {
@@ -71,6 +71,7 @@ class NavbarContainer extends Component {
 
     setCategory = (value) => {
         this.props.getProducts(value)
+        this.props.setCurrentCategory(value)
     }
 
     onCartOverlayHandler() {
@@ -112,12 +113,12 @@ const mapStateToProps = (state) => ({
     currencies: state.navbarReducer.currencies,
     currentCurrency: state.navbarReducer.currentCurrency,
     cart: state.cartReducer.cart,
-    currentCategory: state.productReducer.currentCategory
+    currentCategory: state.categoryReducer.currentCategory
 })
 
 export default compose(
     connect(mapStateToProps, {
-        getCategories, getProducts, setIsCartOverlay, getCurrencies, setCurrentCurrency,
+        getCategories, getProducts, setIsCartOverlay, getCurrencies, setCurrentCurrency, setCurrentCategory,
         setIsCurrencyMenu
     })
 )(NavbarContainer)

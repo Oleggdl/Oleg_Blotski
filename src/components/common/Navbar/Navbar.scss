@@ -2,8 +2,16 @@
 
 .header {
   display: flex;
+  justify-content: space-between;
   margin: 0 auto;
   max-width: 1240px;
+}
+
+@media only screen and (max-width: 1240px) and (min-width: 812px){
+  .header {
+    padding-left: 80px;
+    padding-right: 80px;
+  }
 }
 
 .category-nav {
@@ -47,7 +55,13 @@
 .storefront-logo {
   width: 41px;
   height: 41px;
-  margin: 19.5px auto;
+  margin: 25px 152px 0 0;
+}
+
+@media only screen and (max-width: 812px) {
+  .storefront-logo {
+    margin: 25px 0 0 0;
+  }
 }
 
 .header-actions {

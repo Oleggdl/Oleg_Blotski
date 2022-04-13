@@ -3,6 +3,7 @@ import ProductPageComponent from "./ProductPageComponent"
 import {compose} from "redux"
 import {connect} from "react-redux"
 import {addProductToCart} from "../../redux/cart-reducer"
+import {setCurrentCategory} from "../../redux/category-reducer"
 
 class ProductPageContainer extends Component {
 
@@ -18,6 +19,7 @@ class ProductPageContainer extends Component {
     }
 
     componentDidMount() {
+
         for (let price of this.props.currentProduct?.prices) {
             if (price.currency.label === this.props.currentCurrency.label) {
                 this.setState({
@@ -61,7 +63,7 @@ class ProductPageContainer extends Component {
     }
 
     addToCartHandler() {
-        this.props.addProductToCart(this.props.currentProduct, this.state.attributes)
+        this.props.addProductToCart(this.props.currentProduct, this.state.attributes, true)
     }
 
     selectAttributeHandler(id, value) {
@@ -75,7 +77,7 @@ class ProductPageContainer extends Component {
             <>
                 <ProductPageComponent currentProduct={this.props.currentProduct} currentPrice={this.state.currentPrice}
                                       currentCurrency={this.props.currentCurrency} attributes={this.state.attributes}
-                                      addToCartHandler={this.addToCartHandler}
+                                      addToCartHandler={this.addToCartHandler} cart={this.props.cart}
                                       selectAttributeHandler={this.selectAttributeHandler}
                                       isAllAttributesFill={this.state.isAllAttributesFill}/>
             </>
@@ -85,9 +87,10 @@ class ProductPageContainer extends Component {
 
 const mapStateToProps = (state) => ({
     currentProduct: state.productReducer.currentProduct,
-    currentCurrency: state.navbarReducer.currentCurrency
+    currentCurrency: state.navbarReducer.currentCurrency,
+    cart: state.cartReducer.cart
 })
 
 export default compose(
-    connect(mapStateToProps, {addProductToCart})
+    connect(mapStateToProps, {addProductToCart, setCurrentCategory})
 )(ProductPageContainer)

@@ -121,6 +121,13 @@ class SvgSelector extends Component {
                     </>
                 )
 
+            case 'delete-product-svg':
+                return (
+                    <>
+                        <svg fill="none" stroke="#000" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><title/><g id="cross"><line className="cls-1" x1="7" x2="25" y1="7" y2="25"/><line className="cls-1" x1="7" x2="25" y1="25" y2="7"/></g></svg>
+                    </>
+                )
+
             default:
                 return <svg> </svg>
         }

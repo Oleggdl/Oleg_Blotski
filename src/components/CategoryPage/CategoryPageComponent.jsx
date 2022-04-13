@@ -12,8 +12,7 @@ class CategoryPageComponent extends Component {
                     <h1>{this.props.products.name}</h1>
                     <div className="category-products">
                         {this.props.products.products && this.props.products.products.map(product =>
-                            <ProductCardContainer key={product.id}
-                                                  product={product}/>)}
+                            <ProductCardContainer key={product.id} product={product}/>)}
                     </div>
                 </div>
             </>

@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import CartOverlayElement from "./CartOverlayElement"
 import {compose} from "redux"
 import {connect} from "react-redux"
-import {addProductToCart} from "../../../redux/cart-reducer"
+import {deleteProductFromCart} from "../../../redux/cart-reducer"
 
 class CartOverlayElementContainer extends Component {
 
@@ -14,6 +14,7 @@ class CartOverlayElementContainer extends Component {
         }
         this.increaseAmount = this.increaseAmount.bind(this)
         this.decreaseAmount = this.decreaseAmount.bind(this)
+        this.deleteProductHandler = this.deleteProductHandler.bind(this)
     }
 
     componentDidMount() {
@@ -56,6 +57,10 @@ class CartOverlayElementContainer extends Component {
         }
     }
 
+    deleteProductHandler() {
+        this.props.deleteProductFromCart(this.props.cart.filter(product => product.id !== this.props.product.id))
+    }
+
     render() {
         return (
             <>
@@ -64,6 +69,7 @@ class CartOverlayElementContainer extends Component {
                                     productAmount={this.state.productAmount}
                                     increaseAmount={this.increaseAmount}
                                     decreaseAmount={this.decreaseAmount}
+                                    deleteProductHandler={this.deleteProductHandler}
                 />
             </>
         )
@@ -72,10 +78,11 @@ class CartOverlayElementContainer extends Component {
 
 const mapStateToProps = (state) => ({
     currentProduct: state.productReducer.currentProduct,
-    currentCurrency: state.navbarReducer.currentCurrency
+    currentCurrency: state.navbarReducer.currentCurrency,
+    cart: state.cartReducer.cart
 })
 
 export default compose(
-    connect(mapStateToProps, {addProductToCart})
+    connect(mapStateToProps, {deleteProductFromCart})
 )(CartOverlayElementContainer)
 

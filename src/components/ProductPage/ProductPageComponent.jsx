@@ -2,11 +2,18 @@ import React, {Component} from 'react'
 import './ProductPage.scss'
 import ProductGalleryContainer from "./MainImgSlider/ProductGalleryContainer"
 import ProductAttributesContainer from "./ProductAttributes/ProductAttributesContainer";
+import {NavLink} from "react-router-dom";
 
 class ProductPageComponent extends Component {
 
 
     render() {
+
+        const isAllAttributesAndInStock = !this.props.isAllAttributesFill
+            ? 'disabled-add-to-cart' : ''
+            || !this.props.currentProduct.inStock ? 'disabled-add-to-cart' : ''
+
+        const isProductInCart = this.props.cart.map(product => product.name === this.props.currentProduct.name)
 
         return (
             <>
@@ -21,14 +28,19 @@ class ProductPageComponent extends Component {
                                                         selectAttributeHandler={this.props.selectAttributeHandler}/>)}
                         <h3>Price:</h3>
                         <p className="product-price">{this.props.currentCurrency.symbol}{this.props.currentPrice}</p>
-                        <button disabled={!this.props.currentProduct.inStock ? true : !this.props.isAllAttributesFill}
-                                onClick={this.props.addToCartHandler}
-                                className={(!this.props.isAllAttributesFill || !this.props.currentProduct.inStock)
-                                    ? 'disabled-add-to-cart' : ''}
-                        >
-                            Add to cart
-                        </button>
-                        <p className="product-page-description">{this.props.currentProduct.description}</p>
+                        {!isProductInCart.includes(true)
+                            ? <button disabled={!!this.props.currentProduct.attributes.length
+                                ? (!this.props.isAllAttributesFill || !this.props.currentProduct.inStock) : ''}
+                                      onClick={this.props.addToCartHandler}
+                                      className={!!this.props.currentProduct.attributes.length
+                                          ? isAllAttributesAndInStock : ''}>
+                                Add to cart
+                            </button>
+                            : <NavLink to="/cart-page">
+                                <button>View bag</button>
+                            </NavLink>}
+                        <div className="product-page-description"
+                             dangerouslySetInnerHTML={{__html: this.props.currentProduct.description}}/>
                     </div>
                 </div>
             </>

@@ -15,7 +15,7 @@ class CartOverlayComponent extends Component {
                         <CartOverlayElementContainer key={product.id} product={product}/>)}
                     <div className="cart-overlay-total-cost">
                         <h4>Total</h4>
-                        <p>$100.00</p>
+                        <p>{this.props.currentCurrency.symbol}{this.props.totalAmount}</p>
                     </div>
                     <div className="cart-overlay-buttons">
                         <NavLink to="/cart-page">

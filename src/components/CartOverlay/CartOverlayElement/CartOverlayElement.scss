@@ -40,7 +40,7 @@
   bottom: 5px;
   display: flex;
 
-  div{
+  div {
     min-width: 24px;
     height: 24px;
     margin-right: 8px;
@@ -70,5 +70,20 @@
 
   div {
     @include disabled-selection;
+  }
+}
+
+.delete-product-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 5;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+
+  svg{
+    width: 24px;
+    height: 24px;
   }
 }

@@ -10,8 +10,9 @@ class CartPageComponent extends Component {
             <>
                 <div className="cart-page-container">
                     <h2>Cart</h2>
-                    {this.props.cart && this.props.cart.map(product => <CartElementContainer key={product.id}
-                                                                                             product={product}/>)}
+                    {this.props.cart.length === 0 ? <h3 className="empty-cart-title">Cart is empty</h3>
+                        : this.props.cart && this.props.cart.map(product => <CartElementContainer key={product.id}
+                                                                                                  product={product}/>)}
                 </div>
             </>
         )

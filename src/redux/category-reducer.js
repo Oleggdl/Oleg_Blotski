@@ -1,10 +1,13 @@
 import {client} from "../index"
 import {gql} from "@apollo/client"
+import {setCurrentProductActionCreator} from "./product-reducer";
 
 const GET_CATEGORIES = 'GET_CATEGORIES'
+const SET_CURRENT_CATEGORY = 'SET_CURRENT_CATEGORY'
 
 let initialState = {
-    categories: []
+    categories: [],
+    currentCategory: null
 }
 
 const categoryReducer = (state = initialState, action) => {
@@ -17,6 +20,13 @@ const categoryReducer = (state = initialState, action) => {
             }
         }
 
+        case SET_CURRENT_CATEGORY: {
+            return {
+                ...state,
+                currentCategory: action.currentCategory
+            }
+        }
+
         default:
             return state
     }
@@ -24,6 +34,7 @@ const categoryReducer = (state = initialState, action) => {
 
 
 export const getCategoriesActionCreator = categories => ({type: GET_CATEGORIES, categories})
+export const setCurrentCategoryActionCreator = currentCategory => ({type: SET_CURRENT_CATEGORY, currentCategory})
 
 export const getCategories = () => {
 
@@ -37,7 +48,17 @@ export const getCategories = () => {
                     }
                     `
         })
-            .then(result => dispatch(getCategoriesActionCreator(result.data.categories)))
+            .then(result => {
+                dispatch(getCategoriesActionCreator(result.data.categories))
+                dispatch(setCurrentCategoryActionCreator(result.data.categories[0].name))
+            })
+    }
+}
+
+export const setCurrentCategory = (currentCategory) => {
+
+    return async dispatch => {
+        dispatch(setCurrentCategoryActionCreator(currentCategory))
     }
 }
 

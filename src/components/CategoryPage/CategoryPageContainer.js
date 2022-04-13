@@ -2,32 +2,24 @@ import React, {Component} from 'react'
 import CategoryPageComponent from "./CategoryPageComponent"
 import {compose} from "redux"
 import {connect} from "react-redux"
-import {getAllProducts, setCurrentProduct} from "../../redux/product-reducer"
+import {getProducts} from "../../redux/product-reducer"
 
 class CategoryPageContainer extends Component {
 
-    constructor(props) {
-        super(props)
-        this.cartWrapper = React.createRef()
-    }
-
-
     componentDidMount() {
-        this.props.getAllProducts()
-        // this.cartWrapper.current.addEventListener('click', () => {
-        //     console.log('test')
-        // })
+        this.props.currentCategory && this.props.getProducts(this.props.currentCategory)
     }
 
-    componentWillUnmount() {
-
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.currentCategory !== prevProps.currentCategory) {
+            this.props.currentCategory && this.props.getProducts(this.props.currentCategory)
+        }
     }
 
     render() {
         return (
             <>
-                <CategoryPageComponent products={this.props.products} cartWrapper={this.cartWrapper}
-                                       isCartOverlay={this.props.isCartOverlay}/>
+                <CategoryPageComponent products={this.props.products} isCartOverlay={this.props.isCartOverlay}/>
             </>
         )
     }
@@ -35,10 +27,10 @@ class CategoryPageContainer extends Component {
 
 const mapStateToProps = (state) => ({
     products: state.productReducer.products,
-    categories: state.categoryReducer.categories,
-    isCartOverlay: state.navbarReducer.isCartOverlay
+    isCartOverlay: state.navbarReducer.isCartOverlay,
+    currentCategory: state.categoryReducer.currentCategory
 })
 
 export default compose(
-    connect(mapStateToProps, {getAllProducts})
+    connect(mapStateToProps, {getProducts})
 )(CategoryPageContainer)

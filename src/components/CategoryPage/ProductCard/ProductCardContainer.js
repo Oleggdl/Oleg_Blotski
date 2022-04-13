@@ -3,6 +3,7 @@ import ProductCardComponent from "./ProductCardComponent"
 import {compose} from "redux"
 import {connect} from "react-redux"
 import {setCurrentProduct} from "../../../redux/product-reducer"
+import {addProductToCart} from "../../../redux/cart-reducer";
 
 class ProductCardContainer extends Component {
 
@@ -10,13 +11,15 @@ class ProductCardContainer extends Component {
         super(props)
         this.currentProductHandler = this.currentProductHandler.bind(this)
         this.addToCartHandler = this.addToCartHandler.bind(this)
+        this.selectAttributeHandler = this.selectAttributeHandler.bind(this)
         this.state = {
-            currentPrice: null
+            currentPrice: null,
+            attributes: {}
         }
-
     }
 
     componentDidMount() {
+        this.selectAttributeHandler()
         for (let price of this.props.product.prices) {
             if (price.currency.label === this.props.currentCurrency.label) {
                 this.setState({
@@ -43,7 +46,17 @@ class ProductCardContainer extends Component {
     }
 
     addToCartHandler() {
-        this.props.addProductToCart(this.props.currentProduct)
+        console.log(this.state.attributes)
+        // this.props.addProductToCart(this.props.currentProduct, this.state.attributes)
+    }
+
+    selectAttributeHandler() {
+        this.props.product.attributes.map(attribute => {
+                this.setState({
+                    attributes: {...this.state.attributes, [attribute.name]: attribute.items[0].value}
+                })
+            }
+        )
     }
 
     render() {
@@ -63,5 +76,5 @@ const mapStateToProps = (state) => ({
 })
 
 export default compose(
-    connect(mapStateToProps, {setCurrentProduct})
+    connect(mapStateToProps, {setCurrentProduct, addProductToCart})
 )(ProductCardContainer)

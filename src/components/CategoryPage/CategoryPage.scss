@@ -1,6 +1,6 @@
 .category-container {
   position: relative;
-  width: 1240px;
+  max-width: 1240px;
   margin-left: auto;
   margin-right: auto;
 
@@ -25,4 +25,30 @@
   grid-row-gap: 103px;
   margin-top: 112px;
   padding-bottom: 191px;
+}
+
+@media only screen and (max-width: 1240px) {
+  .category-products {
+    display: grid;
+    max-width: 812px;
+    grid-template-columns: 386px 386px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .category-container {
+    h1 {
+      margin-left: 80px;
+    }
+  }
+}
+
+@media only screen and (max-width: 812px) {
+  .category-products {
+    display: grid;
+    max-width: 386px;
+    grid-template-columns: 386px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 100px;
+  }
 }

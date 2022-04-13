@@ -28,6 +28,9 @@ class CartOverlayElement extends Component {
                     <div className="cart-overlay-element-image">
                         <img src={this.props.product.gallery[0]} alt="product image"/>
                     </div>
+                    <div className="delete-product-btn" onClick={this.props.deleteProductHandler}>
+                        <SvgSelector svgName="delete-product-svg"/>
+                    </div>
                 </div>
             </>
         )

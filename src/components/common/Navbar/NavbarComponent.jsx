@@ -41,7 +41,8 @@ class NavbarComponent extends Component {
                         <div className="cart-icon" ref={this.props.cartBtnRef}
                              onClick={this.props.onCartOverlayHandler}>
                             <SvgSelector svgName="cart-icon"/>
-                            <div className="cart-product-count">{this.props.cart.length}</div>
+                            {this.props.cart.length !== 0
+                                ? <div className="cart-product-count">{this.props.cart.length}</div> : null}
                         </div>
 
                         {this.props.isCartOverlay && <CartOverlayContainer cartContainer={this.props.cartContainer}/>}
