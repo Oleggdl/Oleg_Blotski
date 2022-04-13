@@ -2,9 +2,11 @@
   position: absolute;
   top: 80px;
   right: 0;
-  z-index: 3;
+  z-index: 4;
   width: 325px;
-  padding: 10px 16px;
+  max-height: 80vh;
+  padding: 10px 16px 20px 16px;
+  overflow-y: auto;
   background-color: #ffffff;
 
   h3 {

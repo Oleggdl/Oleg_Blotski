@@ -15,8 +15,10 @@ class CartElementComponent extends Component {
                         <p className="cart-element-price">
                             {this.props.currentCurrency.symbol}{this.props.currentPrice}</p>
                         <div className="cart-element-info-attributes">
-                            <div>S</div>
-                            <div>M</div>
+                            {Object.values(this.props.product.selectedAttributes).map((attribute, index) =>
+                                <div style={attribute.includes('#')
+                                    ? {backgroundColor: `${attribute}`} : null} key={index}>
+                                    {attribute.includes('#') ? null : attribute}</div>)}
                         </div>
                     </div>
                     <div className="cart-element-amount">
@@ -24,17 +26,7 @@ class CartElementComponent extends Component {
                         <div className="cart-product-amount">{this.props.productAmount}</div>
                         <div onClick={this.props.decreaseAmount}><SvgSelector svgName="minus-square-icon"/></div>
                     </div>
-
                     <SliderContainer product={this.props.product}/>
-                    {/*<div className="cart-element-slider">*/}
-                    {/*    <div className="left-arrow-icon" onClick={this.props.previousSlideHandler}>*/}
-                    {/*        <SvgSelector svgName="left-arrow-icon"/></div>*/}
-                    {/*    {this.props.product.gallery.map((img, index) =>*/}
-                    {/*        <div key={index} className="cart-element-slide"><img src={img} alt="product image"/></div>)}*/}
-
-                    {/*    <div className="right-arrow-icon" onClick={this.props.nextSlideHandler}>*/}
-                    {/*        <SvgSelector svgName="right-arrow-icon"/></div>*/}
-                    {/*</div>*/}
                 </div>
             </>
         )

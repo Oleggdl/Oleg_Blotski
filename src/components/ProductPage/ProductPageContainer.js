@@ -12,13 +12,7 @@ class ProductPageContainer extends Component {
         this.selectAttributeHandler = this.selectAttributeHandler.bind(this)
         this.state = {
             currentPrice: null,
-            attributes: {
-                'Color': null,
-                'Capacity': null,
-                'With USB 3 ports': null,
-                'Touch ID in keyboard': null,
-                'Size': null
-            },
+            attributes: {},
             isAllAttributesFill: false
         }
     }
@@ -67,7 +61,7 @@ class ProductPageContainer extends Component {
     }
 
     addToCartHandler() {
-        this.props.addProductToCart(this.props.currentProduct)
+        this.props.addProductToCart(this.props.currentProduct, this.state.attributes)
     }
 
     selectAttributeHandler(id, value) {

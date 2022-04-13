@@ -10,7 +10,7 @@ class NavbarComponent extends Component {
     render() {
         return (
             <>
-                <header className="category-header">
+                <header className="header">
                     <nav className="category-nav">
                         <ul>
                             {this.props.categories.map((category, index) =>
@@ -41,9 +41,11 @@ class NavbarComponent extends Component {
                             <div className="cart-product-count">{this.props.cart.length}</div>
                         </div>
 
-                        {this.props.isCartOverlay && <CartOverlayContainer/>}
+                        {this.props.isCartOverlay && <CartOverlayContainer cartContainer={this.props.cartContainer}/>}
                     </div>
                 </header>
+                {this.props.isCartOverlay && <div className="cart-overlay-wrapper">
+                </div>}
             </>
         )
     }

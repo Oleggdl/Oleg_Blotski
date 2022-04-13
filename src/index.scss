@@ -2,14 +2,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&family=Source+Sans+Pro:wght@200;300;400;600;700;900&display=swap');
 
 
+
 body {
+  min-height: 100vh;
   margin: 0;
   font-family: 'Raleway', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #1d1f22;
-  //overflow-x: hidden;
-
+  overflow-x: hidden;
+  position: relative;
   *{
     box-sizing: border-box;
   }

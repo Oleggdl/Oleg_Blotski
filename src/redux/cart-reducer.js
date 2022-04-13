@@ -10,7 +10,7 @@ const cartReducer = (state = initialState, action) => {
         case ADD_PRODUCT_TO_CART: {
             return {
                 ...state,
-                cart: [...state.cart, action.cart]
+                cart: [...state.cart, {...action.product, selectedAttributes: action.attributes}]
             }
         }
 
@@ -20,12 +20,12 @@ const cartReducer = (state = initialState, action) => {
 }
 
 
-export const addProductToCartActionCreator = cart => ({type: ADD_PRODUCT_TO_CART, cart})
+export const addProductToCartActionCreator = (product, attributes) => ({type: ADD_PRODUCT_TO_CART, product, attributes})
 
-export const addProductToCart = (product) => {
+export const addProductToCart = (product, attributes) => {
 
     return async dispatch => {
-        dispatch(addProductToCartActionCreator(product))
+        dispatch(addProductToCartActionCreator(product, attributes))
     }
 }
 

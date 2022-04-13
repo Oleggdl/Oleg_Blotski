@@ -12,9 +12,12 @@ class CartOverlayElement extends Component {
                     <div className="cart-overlay-info">
                         <h4>{this.props.product.name}</h4>
                         <p>{this.props.currentCurrency.symbol}{this.props.currentPrice}</p>
+
                         <div className="cart-overlay-element-attributes">
-                            <div>S</div>
-                            <div>M</div>
+                            {Object.values(this.props.product.selectedAttributes).map((attribute, index) =>
+                                <div style={attribute.includes('#')
+                                    ? {backgroundColor: `${attribute}`}
+                                    : null} key={index}>{attribute.includes('#') ? null : attribute}</div>)}
                         </div>
                     </div>
                     <div className="cart-overlay-amount">

@@ -14,7 +14,8 @@ class NavbarContainer extends Component {
         this.state = {
             isCurrencyOpen: false
         }
-        this.currencyRef = React.createRef();
+        this.currencyRef = React.createRef()
+        this.cartContainer = React.createRef()
 
         this.setIsCurrencyOpen = this.setIsCurrencyOpen.bind(this)
         this.currentCurrencyHandler = this.currentCurrencyHandler.bind(this)
@@ -44,7 +45,26 @@ class NavbarContainer extends Component {
         //     }
         // )
 
+        if (this.cartContainer) {
+            window.addEventListener('mousedown', (e) => {
+                    if (this.cartContainer.current) {
+                        if (!this.cartContainer.current.contains(e.target)) {
+                            this.props.setIsCartOverlay(false)
+                        }
+                    }
+                }
+            )
+        }
+
+
     }
+
+    // componentDidUpdate(prevProps, prevState, snapshot) {
+    //     if (this.props.isCartOverlay !== prevProps.isCartOverlay) {
+    //
+    //     }
+    //
+    // }
 
     componentWillUnmount() {//todo
         // window.removeEventListener('click', (e) => {
@@ -57,6 +77,15 @@ class NavbarContainer extends Component {
         //         }
         //     }
         // })
+
+        window.removeEventListener('mousedown', (e) => {
+                if (this.cartContainer.current) {
+                    if (!this.cartContainer.current.contains(e.target)) {
+                        this.props.setIsCartOverlay(false)
+                    }
+                }
+            }
+        )
     }
 
     setCategory = (value) => {
@@ -83,7 +112,8 @@ class NavbarContainer extends Component {
                                  isCartOverlay={this.props.isCartOverlay} currencies={this.props.currencies}
                                  setIsCurrencyOpen={this.setIsCurrencyOpen} isCurrencyOpen={this.state.isCurrencyOpen}
                                  currencyRef={this.currencyRef} currentCurrencyHandler={this.currentCurrencyHandler}
-                                 currentCurrency={this.props.currentCurrency} cart={this.props.cart}/>
+                                 currentCurrency={this.props.currentCurrency} cart={this.props.cart}
+                                 cartContainer={this.cartContainer}/>
             </>
         )
     }

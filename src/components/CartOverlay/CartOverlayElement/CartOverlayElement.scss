@@ -1,6 +1,7 @@
 @import "src/styles/mixins";
 
 .cart-overlay-element-container {
+  position: relative;
   display: flex;
   justify-content: space-between;
   margin: 26px 0 39px 0;
@@ -35,7 +36,21 @@
 }
 
 .cart-overlay-element-attributes {
+  position: absolute;
+  bottom: 5px;
   display: flex;
+
+  div{
+    min-width: 24px;
+    height: 24px;
+    margin-right: 8px;
+    padding: 2px 2px 0 2px;
+    border: 1px #1d1f22 solid;
+    text-align: center;
+    font-weight: 400;
+    font-size: 14px;
+    font-family: 'Source Sans Pro', sans-serif;
+  }
 }
 
 .cart-overlay-amount {
