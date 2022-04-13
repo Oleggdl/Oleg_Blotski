@@ -14,7 +14,8 @@ class NavbarComponent extends Component {
                     <nav className="category-nav">
                         <ul>
                             {this.props.categories.map((category, index) =>
-                                <NavLink to="/" key={index} className="category-link"
+                                <NavLink to="/" key={index} className={this.props.currentCategory === category.name
+                                    ? 'category-link active-link' : 'category-link'}
                                          onClick={() => this.props.setCategory(category.name)}>{category.name}
                                 </NavLink>)}
                         </ul>

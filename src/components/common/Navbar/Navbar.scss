@@ -7,6 +7,7 @@
 }
 
 .category-nav {
+  min-width: 250px;
   height: 80px;
 
   ul {
@@ -32,7 +33,6 @@
       &:hover {
         border-bottom: 2px #5ece7b solid;
         color: #5ece7b;
-        font-weight: 600;
       }
     }
 

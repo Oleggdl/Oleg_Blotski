@@ -33,6 +33,25 @@
   }
 }
 
+.is-in-stock {
+  position: absolute;
+  z-index: 2;
+  top: 165px;
+  left: 91px;
+  text-transform: uppercase;
+  color: #8d8f9a;
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.out-of-stock-img {
+  opacity: 0.6;
+}
+
+.out-of-stock-text {
+  color: #8d8f9a;
+}
+
 .product-card-content {
   padding: 16px;
 

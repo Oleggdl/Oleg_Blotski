@@ -98,6 +98,7 @@ class NavbarContainer extends Component {
                                  currentCurrency={this.props.currentCurrency} cart={this.props.cart}
                                  cartContainer={this.cartContainer} currencyBtnRef={this.currencyBtnRef}
                                  isCurrencyMenuHandler={this.isCurrencyMenuHandler}
+                                 currentCategory={this.props.currentCategory}
                 />
             </>
         )
@@ -110,7 +111,8 @@ const mapStateToProps = (state) => ({
     isCurrencyMenu: state.navbarReducer.isCurrencyMenu,
     currencies: state.navbarReducer.currencies,
     currentCurrency: state.navbarReducer.currentCurrency,
-    cart: state.cartReducer.cart
+    cart: state.cartReducer.cart,
+    currentCategory: state.productReducer.currentCategory
 })
 
 export default compose(

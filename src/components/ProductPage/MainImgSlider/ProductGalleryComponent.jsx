@@ -15,8 +15,10 @@ class ProductGalleryComponent extends Component {
                         </div>)}
                 </div>
                 <div className="product-main-image">
+                    {!this.props.currentProduct.inStock && <div className="is-in-stock-PDP">Out of stock</div>}
                     {this.props.currentProduct.gallery && this.props.currentProduct.gallery.map((img, index) =>
                         <div className={this.props.slideIndex === index + 1 ? "main-img currentSlide" : "main-img"}
+                             // style={!this.props.currentProduct.inStock && {opacity: "0.6"}}
                              key={index}>
                             <img src={img} alt="product image"/>
                         </div>)}
