@@ -21,7 +21,7 @@ class ProductPageComponent extends Component {
 
         return (
             <>
-                <div className="product-page-container">
+                <section className="product-page-container">
                     <ProductGalleryContainer currentProduct={currentProduct}/>
                     <div className="product-page-info">
                         <h2>{currentProduct.brand}</h2>
@@ -44,7 +44,7 @@ class ProductPageComponent extends Component {
                             <Interweave content={currentProduct.description}/>
                         </div>
                     </div>
-                </div>
+                </section>
             </>
         )
     }

@@ -10,13 +10,13 @@ class CategoryPageComponent extends Component {
 
         return (
             <>
-                <div className="category-container">
+                <section className="category-container">
                     <h1>{products.name}</h1>
                     <div className="category-products">
                         {products.products && products.products.map(product =>
                             <ProductCardContainer key={product.id} product={product}/>)}
                     </div>
-                </div>
+                </section>
             </>
         )
     }

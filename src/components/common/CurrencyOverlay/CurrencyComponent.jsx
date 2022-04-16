@@ -9,12 +9,12 @@ class CurrencyComponent extends Component {
 
         return (
             <>
-                <div className="currencies-container" ref={currencyRef}>
+                <aside className="currencies-container" ref={currencyRef}>
                     {currencies && currencies.map((currency, index) =>
                         <div key={index} onClick={() => currentCurrencyHandler(currency)}>
                             <span>{currency.symbol}</span>{currency.label}
                         </div>)}
-                </div>
+                </aside>
             </>
         )
     }

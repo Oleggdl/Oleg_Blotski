@@ -11,7 +11,7 @@ class CartOverlayComponent extends Component {
 
         return (
             <>
-                <div className="cart-overlay-container" ref={cartContainer}>
+                <aside className="cart-overlay-container" ref={cartContainer}>
                     <h3>My Bag, <span>{cart.length} items</span></h3>
                     {cart && cart.map(product => <CartElementContainer key={product.id} product={product}
                                                                        isOverlay={true}/>)}
@@ -25,7 +25,7 @@ class CartOverlayComponent extends Component {
                         </NavLink>
                         <button onClick={() => console.log(cart)}>Check out</button>
                     </div>
-                </div>
+                </aside>
             </>
         )
     }

@@ -10,13 +10,13 @@ class CartPageComponent extends Component {
 
         return (
             <>
-                <div className="cart-page-container">
+                <section className="cart-page-container">
                     <h2>Cart</h2>
                     {cart.length === 0
                         ? <h3 className="empty-cart-title">Cart is empty</h3>
                         : cart && cart.map(product =>
                         <CartElementContainer key={product.id} product={product} isOverlay={false}/>)}
-                </div>
+                </section>
             </>
         )
     }
