@@ -48,12 +48,10 @@ class ProductPageContainer extends Component {
             }
         }
 
-        //todo
         if (this.props.currentProduct !== prevProps.currentProduct
             || this.props.currentCurrency !== prevProps.currentCurrency) {
             for (let price of this.props.currentProduct?.prices) {
                 if (price.currency.label === this.props.currentCurrency.label) {
-                    console.log('test')
                     this.setState({
                         currentPrice: price.amount
                     })

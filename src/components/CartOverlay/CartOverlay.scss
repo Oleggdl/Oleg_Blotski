@@ -2,8 +2,8 @@
   position: absolute;
   top: 80px;
   right: 0;
-  z-index: 4;
-  width: 325px;
+  z-index: 6;
+  min-width: 325px;
   max-height: 80vh;
   padding: 10px 16px 20px 16px;
   overflow-y: auto;
@@ -38,12 +38,12 @@
 
 .cart-overlay-buttons {
   display: flex;
-  justify-content: space-between;
   margin-top: 15px;
 
 
   button {
     &:first-child {
+      margin-right: 12px;
       border: 1px solid #1d1f22;
       background-color: unset;
       color: rgba(29, 31, 34, 1);

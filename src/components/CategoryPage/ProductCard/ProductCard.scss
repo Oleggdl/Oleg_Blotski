@@ -13,7 +13,12 @@
 
     .circle-cart-icon {
       display: block;
-      animation: showBlock .3s linear forwards;
+      animation: showCartBtn .3s linear forwards;
+    }
+
+    .cart-icon-disabled{
+      display: block;
+      animation: showCartBtnDisabled .3s linear forwards;
     }
   }
 }
@@ -79,11 +84,25 @@
   @include disabled-selection;
 }
 
-@keyframes showBlock {
+.cart-icon-disabled {
+  cursor: not-allowed;
+  opacity: 0.6!important;
+}
+
+@keyframes showCartBtn {
   0% {
     opacity: 0;
   }
   100% {
     opacity: 1;
+  }
+}
+
+@keyframes showCartBtnDisabled {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.6;
   }
 }

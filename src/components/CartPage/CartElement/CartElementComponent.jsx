@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import './CartElement.scss'
 import SvgSelector from "../../common/SvgSelector"
-import SliderContainer from "../../common/Slider/SliderContainer";
+import SliderContainer from "../../common/Slider/SliderContainer"
 
 class CartElementComponent extends Component {
 
@@ -15,18 +15,21 @@ class CartElementComponent extends Component {
                         <p className="cart-element-price">
                             {this.props.currentCurrency.symbol}{this.props.currentPrice}</p>
                         <div className="cart-element-info-attributes">
-                            {Object.values(this.props.product.selectedAttributes).map((attribute, index) =>
-                                <div style={attribute.includes('#')
-                                    ? {backgroundColor: `${attribute}`} : null} key={index}>
-                                    {attribute.includes('#') ? null : attribute}</div>)}
+                            {this.props.product.selectedAttributes
+                                && Object.values(this.props.product.selectedAttributes).map((attribute, index) =>
+                                    <div style={attribute.includes('#')
+                                        ? {backgroundColor: `${attribute}`} : null} key={index}>
+                                        {attribute.includes('#') ? null : attribute}</div>)}
                         </div>
                     </div>
                     <div className="cart-element-amount">
                         <div onClick={this.props.increaseAmount}><SvgSelector svgName="plus-square-icon"/></div>
-                        <div className="cart-product-amount">{this.props.productAmount}</div>
+                        <div className="cart-product-amount">{this.props.productAmount[this.props.product.id]}</div>
                         <div onClick={this.props.decreaseAmount}><SvgSelector svgName="minus-square-icon"/></div>
                     </div>
-                    <SliderContainer product={this.props.product}/>
+                    <SliderContainer product={this.props.product}
+                                     deleteProductHandler={this.props.deleteProductHandler}/>
+
                 </div>
             </>
         )

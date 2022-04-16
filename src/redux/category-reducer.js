@@ -1,6 +1,5 @@
 import {client} from "../index"
 import {gql} from "@apollo/client"
-import {setCurrentProductActionCreator} from "./product-reducer";
 
 const GET_CATEGORIES = 'GET_CATEGORIES'
 const SET_CURRENT_CATEGORY = 'SET_CURRENT_CATEGORY'

@@ -34,7 +34,8 @@ class SliderContainer extends Component {
         return (
             <>
                 <SliderComponent product={this.props.product} previousSlideHandler={this.previousSlideHandler}
-                                 nextSlideHandler={this.nextSlideHandler} slideIndex={this.state.slideIndex}/>
+                                 nextSlideHandler={this.nextSlideHandler} slideIndex={this.state.slideIndex}
+                                 deleteProductHandler={this.props.deleteProductHandler}/>
             </>
         )
     }

@@ -1,11 +1,12 @@
 import React, {Component} from 'react'
-import CartOverlayElement from "./CartOverlayElement"
 import {compose} from "redux"
 import {connect} from "react-redux"
 import {deleteProductFromCart} from "../../../redux/cart-reducer"
 import {setProductAmount} from "../../../redux/product-reducer"
+import CartElementComponent from "../../CartPage/CartElement/CartElementComponent"
+import CartOverlayElement from "../../CartOverlay/CartOverlayElement/CartOverlayElement"
 
-class CartOverlayElementContainer extends Component {
+class CartElementContainer extends Component {
 
     constructor(props) {
         super(props)
@@ -63,13 +64,19 @@ class CartOverlayElementContainer extends Component {
     render() {
         return (
             <>
-                <CartOverlayElement product={this.props.product} currentPrice={this.state.currentPrice}
-                                    currentCurrency={this.props.currentCurrency}
-                                    productAmount={this.props.productAmount}
-                                    increaseAmount={this.increaseAmount}
-                                    decreaseAmount={this.decreaseAmount}
-                                    deleteProductHandler={this.deleteProductHandler}
-                />
+                {this.props.isOverlay
+                    ? <CartOverlayElement product={this.props.product} currentPrice={this.state.currentPrice}
+                                          currentCurrency={this.props.currentCurrency}
+                                          productAmount={this.props.productAmount}
+                                          increaseAmount={this.increaseAmount}
+                                          decreaseAmount={this.decreaseAmount}
+                                          deleteProductHandler={this.deleteProductHandler}/>
+                    : <CartElementComponent product={this.props.product} currentCurrency={this.props.currentCurrency}
+                                            currentPrice={this.state.currentPrice}
+                                            productAmount={this.props.productAmount}
+                                            increaseAmount={this.increaseAmount}
+                                            decreaseAmount={this.decreaseAmount}
+                                            deleteProductHandler={this.deleteProductHandler}/>}
             </>
         )
     }
@@ -84,5 +91,5 @@ const mapStateToProps = (state) => ({
 
 export default compose(
     connect(mapStateToProps, {deleteProductFromCart, setProductAmount})
-)(CartOverlayElementContainer)
+)(CartElementContainer)
 

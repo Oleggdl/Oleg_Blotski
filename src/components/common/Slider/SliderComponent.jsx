@@ -9,6 +9,9 @@ class SliderComponent extends Component {
         return (
             <>
                 <div className="cart-element-slider">
+                    <div className="delete-product-btn" onClick={this.props.deleteProductHandler}>
+                        <SvgSelector svgName="delete-product-svg"/>
+                    </div>
                     <div className="left-arrow-icon" onClick={this.props.previousSlideHandler}>
                         <SvgSelector svgName="left-arrow-icon"/></div>
                     {this.props.product.gallery.map((img, index) =>

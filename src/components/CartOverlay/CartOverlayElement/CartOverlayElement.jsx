@@ -6,8 +6,6 @@ class CartOverlayElement extends Component {
 
 
     render() {
-
-        // console.log(this.props.productAmount)
         return (
             <>
                 <div className="cart-overlay-element-container">
@@ -16,10 +14,11 @@ class CartOverlayElement extends Component {
                         <p>{this.props.currentCurrency.symbol}{this.props.currentPrice}</p>
 
                         <div className="cart-overlay-element-attributes">
-                            {Object.values(this.props.product.selectedAttributes).map((attribute, index) =>
-                                <div style={attribute.includes('#')
-                                    ? {backgroundColor: `${attribute}`}
-                                    : null} key={index}>{attribute.includes('#') ? null : attribute}</div>)}
+                            {this.props.product.selectedAttributes
+                                && Object.values(this.props.product.selectedAttributes).map((attribute, index) =>
+                                    <div style={attribute.includes('#')
+                                        ? {backgroundColor: `${attribute}`}
+                                        : null} key={index}>{attribute.includes('#') ? null : attribute}</div>)}
                         </div>
                     </div>
                     <div className="cart-overlay-amount">

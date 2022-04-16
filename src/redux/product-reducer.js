@@ -4,11 +4,13 @@ import {gql} from "@apollo/client"
 const GET_PRODUCTS = 'GET_PRODUCTS'
 const SET_CURRENT_PRODUCT = 'SET_CURRENT_PRODUCT'
 const SET_PRODUCT_AMOUNT = 'SET_PRODUCT_AMOUNT'
+const SET_ATTRIBUTES = 'SET_ATTRIBUTES'
 
 let initialState = {
     products: [],
-    currentProduct: {},
-    productAmount: {}
+    currentProduct: JSON.parse(window.sessionStorage.getItem('currentProduct')),
+    productAmount: {},
+    attributes: {}
 }
 
 const productReducer = (state = initialState, action) => {
@@ -36,6 +38,13 @@ const productReducer = (state = initialState, action) => {
             }
         }
 
+        case SET_ATTRIBUTES: {
+            return {
+                ...state,
+                attributes: {...state.attributes, [action.productName]: action.attributes}
+            }
+        }
+
         default:
             return state
     }
@@ -44,6 +53,7 @@ const productReducer = (state = initialState, action) => {
 export const getProductsActionCreator = products => ({type: GET_PRODUCTS, products})
 export const setCurrentProductActionCreator = currentProduct => ({type: SET_CURRENT_PRODUCT, currentProduct})
 export const setProductAmountActionCreator = (id, value) => ({type: SET_PRODUCT_AMOUNT, id, value})
+export const setAttributesActionCreator = (productName, attributes) => ({type: SET_ATTRIBUTES, productName, attributes})
 
 export const getProducts = (category) => {
 
@@ -98,6 +108,13 @@ export const setProductAmount = (id, value) => {
 
     return async dispatch => {
         dispatch(setProductAmountActionCreator(id, value))
+    }
+}
+
+export const setAttributes = (productName, attributes) => {
+
+    return async dispatch => {
+        dispatch(setAttributesActionCreator(productName, attributes))
     }
 }
 

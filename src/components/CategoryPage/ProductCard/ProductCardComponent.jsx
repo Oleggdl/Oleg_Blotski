@@ -7,6 +7,9 @@ class ProductCardComponent extends Component {
 
 
     render() {
+
+        const isProductInCart = this.props.cart?.map(product => product.name === this.props.product.name)
+
         return (
             <>
                 <div className="product-card-container" onClick={this.props.currentProductHandler}>
@@ -14,7 +17,7 @@ class ProductCardComponent extends Component {
                         <div className="product-img">
                             {!this.props.product.inStock && <div className="is-in-stock">Out of stock</div>}
                             <img className={!this.props.product.inStock ? 'out-of-stock-img' : null}
-                                 src={this.props.product.gallery[0]} alt="product image"/>
+                                 src={this.props.product.gallery[0]} alt="product"/>
                         </div>
                         <div
                             className={!this.props.product.inStock
@@ -23,14 +26,22 @@ class ProductCardComponent extends Component {
                             <p>{this.props.currentCurrency.symbol}{this.props.currentPrice}</p>
                         </div>
                     </NavLink>
-                    <div className="circle-cart-icon" onClick={this.props.addToCartHandler}>
-                        <SvgSelector svgName="circle-cart-icon"/>
-                    </div>
+                    {!isProductInCart.includes(true)
+                        ? <div className={!!this.props.product.inStock
+                            ? 'circle-cart-icon' : 'circle-cart-icon cart-icon-disabled'}
+                               onClick={this.props.addToCartHandler}>
+                            <SvgSelector svgName="circle-cart-icon"/>
+                        </div>
+                        : <NavLink to="/cart-page">
+                            <div className="circle-cart-icon">
+                                <SvgSelector svgName="circle-cart-icon"/>
+                            </div>
+                        </NavLink>}
                 </div>
-
             </>
         )
     }
 }
 
 export default ProductCardComponent
+

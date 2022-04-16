@@ -4,7 +4,7 @@ import {compose} from "redux"
 import {connect} from "react-redux"
 import {setIsCartOverlay} from "../../redux/navbar-reducer"
 import {setTotalAmount} from "../../redux/cart-reducer"
-import {setProductAmount} from "../../redux/product-reducer";
+import {setProductAmount} from "../../redux/product-reducer"
 
 class CartOverlayContainer extends Component {
 

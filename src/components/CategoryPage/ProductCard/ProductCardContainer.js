@@ -2,8 +2,8 @@ import React, {Component} from 'react'
 import ProductCardComponent from "./ProductCardComponent"
 import {compose} from "redux"
 import {connect} from "react-redux"
-import {setCurrentProduct} from "../../../redux/product-reducer"
-import {addProductToCart} from "../../../redux/cart-reducer";
+import {setAttributes, setCurrentProduct} from "../../../redux/product-reducer"
+import {addProductToCart} from "../../../redux/cart-reducer"
 
 class ProductCardContainer extends Component {
 
@@ -11,10 +11,9 @@ class ProductCardContainer extends Component {
         super(props)
         this.currentProductHandler = this.currentProductHandler.bind(this)
         this.addToCartHandler = this.addToCartHandler.bind(this)
-        this.selectAttributeHandler = this.selectAttributeHandler.bind(this)
         this.state = {
             currentPrice: null,
-            attributes: {}
+            attributes: []
         }
     }
 
@@ -39,23 +38,28 @@ class ProductCardContainer extends Component {
                 }
             }
         }
+
+        if (this.state.attributes !== prevState.attributes) {
+            this.props.setAttributes(this.props.product.name, this.state.attributes)
+        }
     }
 
     currentProductHandler() {
         this.props.setCurrentProduct(this.props.product)
+        window.sessionStorage.setItem('currentProduct', JSON.stringify(this.props.product))
     }
 
     addToCartHandler() {
-        console.log(this.state.attributes)
-        // this.props.addProductToCart(this.props.currentProduct, this.state.attributes)
+        this.props.product.inStock &&
+        this.props.addProductToCart(this.props.product, this.props.attributes[this.props.product.name], true)
     }
 
     selectAttributeHandler() {
-        this.props.product.attributes.map(attribute => {
-                this.setState({
-                    attributes: {...this.state.attributes, [attribute.name]: attribute.items[0].value}
-                })
-            }
+        this.props.product.attributes.map(attribute =>
+            this.setState(prevState => ({
+                attributes:
+                    {...prevState.attributes, [attribute.id]: attribute.items[0].value}
+            }))
         )
     }
 
@@ -64,7 +68,7 @@ class ProductCardContainer extends Component {
             <>
                 <ProductCardComponent product={this.props.product} currentProductHandler={this.currentProductHandler}
                                       addToCartHandler={this.addToCartHandler} currentPrice={this.state.currentPrice}
-                                      currentCurrency={this.props.currentCurrency}
+                                      currentCurrency={this.props.currentCurrency} cart={this.props.cart}
                 />
             </>
         )
@@ -72,9 +76,11 @@ class ProductCardContainer extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    currentCurrency: state.navbarReducer.currentCurrency
+    currentCurrency: state.navbarReducer.currentCurrency,
+    attributes: state.productReducer.attributes,
+    cart: state.cartReducer.cart
 })
 
 export default compose(
-    connect(mapStateToProps, {setCurrentProduct, addProductToCart})
+    connect(mapStateToProps, {setCurrentProduct, addProductToCart, setAttributes})
 )(ProductCardContainer)
