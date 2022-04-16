@@ -5,6 +5,7 @@ const GET_PRODUCTS = 'GET_PRODUCTS'
 const SET_CURRENT_PRODUCT = 'SET_CURRENT_PRODUCT'
 const SET_PRODUCT_AMOUNT = 'SET_PRODUCT_AMOUNT'
 const SET_ATTRIBUTES = 'SET_ATTRIBUTES'
+const UNSET_PRODUCT_AMOUNT = 'UNSET_PRODUCT_AMOUNT'
 
 let initialState = {
     products: [],
@@ -38,6 +39,13 @@ const productReducer = (state = initialState, action) => {
             }
         }
 
+        case UNSET_PRODUCT_AMOUNT: {
+            return {
+                ...state,
+                productAmount: {...state.productAmount, [action.id]: null}
+            }
+        }
+
         case SET_ATTRIBUTES: {
             return {
                 ...state,
@@ -53,6 +61,7 @@ const productReducer = (state = initialState, action) => {
 export const getProductsActionCreator = products => ({type: GET_PRODUCTS, products})
 export const setCurrentProductActionCreator = currentProduct => ({type: SET_CURRENT_PRODUCT, currentProduct})
 export const setProductAmountActionCreator = (id, value) => ({type: SET_PRODUCT_AMOUNT, id, value})
+export const unsetProductAmountActionCreator = (id) => ({type: UNSET_PRODUCT_AMOUNT, id})
 export const setAttributesActionCreator = (productName, attributes) => ({type: SET_ATTRIBUTES, productName, attributes})
 
 export const getProducts = (category) => {
@@ -107,6 +116,13 @@ export const setProductAmount = (id, value) => {
 
     return async dispatch => {
         dispatch(setProductAmountActionCreator(id, value))
+    }
+}
+
+export const unsetProductAmount = (id) => {
+
+    return async dispatch => {
+        dispatch(unsetProductAmountActionCreator(id))
     }
 }
 

@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {compose} from "redux"
 import {connect} from "react-redux"
 import {deleteProductFromCart} from "../../../redux/cart-reducer"
-import {setProductAmount} from "../../../redux/product-reducer"
+import {setProductAmount, unsetProductAmount} from "../../../redux/product-reducer"
 import CartElementComponent from "../../CartPage/CartElement/CartElementComponent"
 import CartOverlayElement from "../../CartOverlay/CartOverlayElement/CartOverlayElement"
 
@@ -46,6 +46,7 @@ class CartElementContainer extends Component {
 
     deleteProductHandler() {
         this.props.deleteProductFromCart(this.props.cart.filter(product => product.id !== this.props.product.id))
+        this.props.unsetProductAmount(this.props.product.id)
     }
 
     increaseAmount() {
@@ -88,6 +89,6 @@ const mapStateToProps = (state) => ({
 })
 
 export default compose(
-    connect(mapStateToProps, {deleteProductFromCart, setProductAmount})
+    connect(mapStateToProps, {deleteProductFromCart, setProductAmount, unsetProductAmount})
 )(CartElementContainer)
 
