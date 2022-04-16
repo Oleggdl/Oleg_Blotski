@@ -1,5 +1,5 @@
-import {client} from "../index";
-import {gql} from "@apollo/client";
+import {client} from "../index"
+import {gql} from "@apollo/client"
 
 const IS_CURRENCY_MENU = 'IS_CURRENCY_MENU'
 const IS_CART_OVERLAY = 'IS_CART_OVERLAY'
@@ -74,13 +74,12 @@ export const getCurrencies = () => {
     return async dispatch => {
         client.query({
             query: gql`
-                   query currencies {
-                      currencies{
+                query currencies {
+                    currencies{
                         label
                         symbol
-                      }   
-                   }
-                   `
+                    }   
+                }`
         })
             .then(result => {
                 dispatch(getCurrenciesActionCreator(result.data.currencies))
@@ -93,7 +92,6 @@ export const getCurrencies = () => {
 export const setCurrentCurrency = currentCurrency => {
 
     return async dispatch => {
-
         dispatch(setCurrentCurrencyActionCreator(currentCurrency))
     }
 }

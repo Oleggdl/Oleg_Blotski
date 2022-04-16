@@ -44,7 +44,6 @@ class CartElementContainer extends Component {
         }
     }
 
-
     deleteProductHandler() {
         this.props.deleteProductFromCart(this.props.cart.filter(product => product.id !== this.props.product.id))
     }
@@ -83,7 +82,6 @@ class CartElementContainer extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    currentProduct: state.productReducer.currentProduct,
     currentCurrency: state.navbarReducer.currentCurrency,
     productAmount: state.productReducer.productAmount,
     cart: state.cartReducer.cart

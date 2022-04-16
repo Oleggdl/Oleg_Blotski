@@ -16,7 +16,7 @@
       animation: showCartBtn .3s linear forwards;
     }
 
-    .cart-icon-disabled{
+    .cart-icon-disabled {
       display: block;
       animation: showCartBtnDisabled .3s linear forwards;
     }
@@ -86,7 +86,7 @@
 
 .cart-icon-disabled {
   cursor: not-allowed;
-  opacity: 0.6!important;
+  opacity: 0.6 !important;
 }
 
 @keyframes showCartBtn {

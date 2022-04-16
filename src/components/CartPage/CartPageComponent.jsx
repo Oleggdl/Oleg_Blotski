@@ -6,12 +6,15 @@ class CartPageComponent extends Component {
 
     render() {
 
+        const {cart} = this.props
+
         return (
             <>
                 <div className="cart-page-container">
                     <h2>Cart</h2>
-                    {this.props.cart.length === 0 ? <h3 className="empty-cart-title">Cart is empty</h3>
-                        : this.props.cart && this.props.cart.map(product =>
+                    {cart.length === 0
+                        ? <h3 className="empty-cart-title">Cart is empty</h3>
+                        : cart && cart.map(product =>
                         <CartElementContainer key={product.id} product={product} isOverlay={false}/>)}
                 </div>
             </>

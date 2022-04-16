@@ -3,26 +3,26 @@ import './ProductGallery.scss'
 
 class ProductGalleryComponent extends Component {
 
-
     render() {
+
+        const {currentProduct, slideIndex, sliderHandler} = this.props
 
         return (
             <>
                 <div className="project-gallery-container">
                     <div className="product-gallery">
-                        {this.props.currentProduct.gallery && this.props.currentProduct.gallery.map((img, index) =>
-                            <div key={index} onClick={() => this.props.sliderHandler(index)}>
+                        {currentProduct.gallery && currentProduct.gallery.map((img, index) =>
+                            <div key={index} onClick={() => sliderHandler(index)}>
                                 <img src={img} alt="product"/>
                             </div>)}
                     </div>
                     <div className="product-main-image">
-                        {!this.props.currentProduct.inStock && <div className="is-in-stock-PDP">Out of stock</div>}
-                        {this.props.currentProduct.gallery && this.props.currentProduct.gallery.map((img, index) =>
-                            <div className={this.props.slideIndex === index + 1 ? 'main-img currentSlide' : 'main-img'}
+                        {!currentProduct.inStock && <div className="is-in-stock-PDP">Out of stock</div>}
+                        {currentProduct.gallery && currentProduct.gallery.map((img, index) =>
+                            <div className={slideIndex === index + 1 ? 'main-img currentSlide' : 'main-img'}
                                  key={index}>
-                                <img src={img} alt="product"
-                                     style={!this.props.currentProduct.inStock ? {opacity: '0.6'} : null}
-                                />
+                                <img src={img} style={!currentProduct.inStock ? {opacity: '0.6'} : null}
+                                     alt="product"/>
                             </div>)}
                     </div>
                 </div>

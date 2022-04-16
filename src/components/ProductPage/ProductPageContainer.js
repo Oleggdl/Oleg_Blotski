@@ -3,23 +3,21 @@ import ProductPageComponent from "./ProductPageComponent"
 import {compose} from "redux"
 import {connect} from "react-redux"
 import {addProductToCart} from "../../redux/cart-reducer"
-import {setCurrentCategory} from "../../redux/category-reducer"
 
 class ProductPageContainer extends Component {
 
     constructor(props) {
         super(props)
-        this.addToCartHandler = this.addToCartHandler.bind(this)
-        this.selectAttributeHandler = this.selectAttributeHandler.bind(this)
         this.state = {
             currentPrice: null,
             attributes: {},
             isAllAttributesFill: false
         }
+        this.addToCartHandler = this.addToCartHandler.bind(this)
+        this.selectAttributeHandler = this.selectAttributeHandler.bind(this)
     }
 
     componentDidMount() {
-
         for (let price of this.props.currentProduct?.prices) {
             if (price.currency.label === this.props.currentCurrency.label) {
                 this.setState({
@@ -90,5 +88,5 @@ const mapStateToProps = (state) => ({
 })
 
 export default compose(
-    connect(mapStateToProps, {addProductToCart, setCurrentCategory})
+    connect(mapStateToProps, {addProductToCart})
 )(ProductPageContainer)

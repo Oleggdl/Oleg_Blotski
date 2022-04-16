@@ -7,41 +7,41 @@ import {Interweave} from "interweave"
 
 class ProductPageComponent extends Component {
 
-
     render() {
 
-        const isAttributes = !!this.props.currentProduct.attributes.length
-            ? (!this.props.isAllAttributesFill ? 'disabled-add-to-cart' : '')
-            : ''
-        const isProductInCart = this.props.cart.map(product => product.name === this.props.currentProduct.name)
-        const isAllAttributesFill = !!this.props.currentProduct.attributes.length ? !this.props.isAllAttributesFill : ''
+        const {
+            currentPrice, addToCartHandler, cart, currentProduct, currentCurrency, selectAttributeHandler,
+            attributes, isAllAttributesFill
+        } = this.props
+
+        const isAttributes = !!currentProduct.attributes.length
+            ? (!isAllAttributesFill ? 'disabled-add-to-cart' : '') : ''
+        const isProductInCart = cart.map(product => product.name === currentProduct.name)
+        const isAllAttributes = !!currentProduct.attributes.length ? !isAllAttributesFill : ''
 
         return (
             <>
                 <div className="product-page-container">
-                    <ProductGalleryContainer currentProduct={this.props.currentProduct}/>
+                    <ProductGalleryContainer currentProduct={currentProduct}/>
                     <div className="product-page-info">
-                        <h2>{this.props.currentProduct.brand}</h2>
-                        <p className="product-name">{this.props.currentProduct.name}</p>
-                        {this.props.currentProduct.attributes && this.props.currentProduct.attributes.map(attribute =>
-                            <ProductAttributesContainer key={attribute.id} attribute={attribute}
-                                                        attributes={this.props.attributes}
-                                                        selectAttributeHandler={this.props.selectAttributeHandler}/>)}
+                        <h2>{currentProduct.brand}</h2>
+                        <p className="product-name">{currentProduct.name}</p>
+                        {currentProduct.attributes && currentProduct.attributes.map(attribute =>
+                            <ProductAttributesContainer key={attribute.id} attribute={attribute} attributes={attributes}
+                                                        selectAttributeHandler={selectAttributeHandler}/>)}
                         <h3>Price:</h3>
-                        <p className="product-price">{this.props.currentCurrency.symbol}{this.props.currentPrice}</p>
+                        <p className="product-price">{currentCurrency.symbol}{currentPrice}</p>
                         {!isProductInCart.includes(true)
-                            ? <button disabled={!!this.props.currentProduct.inStock ? isAllAttributesFill : true}
-                                      onClick={this.props.addToCartHandler}
-                                      className={!!this.props.currentProduct.inStock
-                                          ? isAttributes
-                                          : 'disabled-add-to-cart'}>
+                            ? <button disabled={!!currentProduct.inStock ? isAllAttributes : true}
+                                      onClick={addToCartHandler}
+                                      className={!!currentProduct.inStock ? isAttributes : 'disabled-add-to-cart'}>
                                 Add to cart
                             </button>
                             : <NavLink to="/cart-page">
                                 <button>View bag</button>
                             </NavLink>}
                         <div className="product-page-description">
-                            <Interweave content={this.props.currentProduct.description}/>
+                            <Interweave content={currentProduct.description}/>
                         </div>
                     </div>
                 </div>

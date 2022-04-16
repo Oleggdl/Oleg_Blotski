@@ -60,38 +60,37 @@ export const getProducts = (category) => {
     return async dispatch => {
         client.query({
             query: gql`
-                    query category {
-                        category(input: {
-                          title: "${category}"
+                query category {
+                    category(input: {
+                        title: "${category}"
                         }){
-                           name
-                           products {
+                        name
+                        products {
                             id
-                             name
-                             gallery
-                             inStock
-                             prices {
-                                 currency {
-                                     label
-                                 }
-                                 amount
-                             }
-                             brand
-                             description
-                             attributes{
-                                 id
-                                 name
-                                 type
-                                 items{
+                            name
+                            gallery
+                            inStock
+                            prices {
+                                currency {
+                                    label
+                                }
+                                amount
+                            }
+                            brand
+                            description
+                            attributes{
+                                id
+                                name
+                                type
+                                items{
                                     displayValue
                                     value
                                     id
-                                 }
-                             }
-                           }
+                                }
+                            }
                         }
                     }
-                    `
+                }`
         })
             .then(result => dispatch(getProductsActionCreator(result.data.category)))
     }
@@ -117,6 +116,5 @@ export const setAttributes = (productName, attributes) => {
         dispatch(setAttributesActionCreator(productName, attributes))
     }
 }
-
 
 export default productReducer

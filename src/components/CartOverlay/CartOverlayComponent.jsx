@@ -5,23 +5,25 @@ import CartElementContainer from "../common/Cart/CartElementContainer"
 
 class CartOverlayComponent extends Component {
 
-
     render() {
+
+        const {cart, cartContainer, viewBagHandler, currentCurrency, totalAmount} = this.props
+
         return (
             <>
-                <div className="cart-overlay-container" ref={this.props.cartContainer}>
-                    <h3>My Bag, <span>{this.props.cart.length} items</span></h3>
-                    {this.props.cart && this.props.cart.map(product =>
-                        <CartElementContainer key={product.id} product={product} isOverlay={true}/>)}
+                <div className="cart-overlay-container" ref={cartContainer}>
+                    <h3>My Bag, <span>{cart.length} items</span></h3>
+                    {cart && cart.map(product => <CartElementContainer key={product.id} product={product}
+                                                                       isOverlay={true}/>)}
                     <div className="cart-overlay-total-cost">
                         <h4>Total</h4>
-                        <p>{this.props.currentCurrency.symbol}{this.props.totalAmount}</p>
+                        <p>{currentCurrency.symbol}{totalAmount}</p>
                     </div>
                     <div className="cart-overlay-buttons">
                         <NavLink to="/cart-page">
-                            <button onClick={this.props.viewBagHandler}>View bag</button>
+                            <button onClick={viewBagHandler}>View bag</button>
                         </NavLink>
-                        <button>Check out</button>
+                        <button onClick={() => console.log(cart)}>Check out</button>
                     </div>
                 </div>
             </>

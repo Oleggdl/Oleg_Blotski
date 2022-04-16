@@ -1,7 +1,9 @@
 import React, {Component} from 'react'
 
 class SvgSelector extends Component {
+
     render() {
+
         switch (this.props.svgName) {
 
             case'brand-icon':

@@ -6,30 +6,32 @@ import SliderContainer from "../../common/Slider/SliderContainer"
 class CartElementComponent extends Component {
 
     render() {
+        const {
+            product, currentCurrency, currentPrice, decreaseAmount, deleteProductHandler, increaseAmount,
+            productAmount
+        } = this.props
+
         return (
             <>
                 <div className="cart-element-container">
                     <div className="cart-element-info">
-                        <h3>{this.props.product.brand}</h3>
-                        <p className="cart-element-name">{this.props.product.name}</p>
-                        <p className="cart-element-price">
-                            {this.props.currentCurrency.symbol}{this.props.currentPrice}</p>
+                        <h3>{product.brand}</h3>
+                        <p className="cart-element-name">{product.name}</p>
+                        <p className="cart-element-price">{currentCurrency.symbol}{currentPrice}</p>
                         <div className="cart-element-info-attributes">
-                            {this.props.product.selectedAttributes
-                                && Object.values(this.props.product.selectedAttributes).map((attribute, index) =>
+                            {product.selectedAttributes
+                                && Object.values(product.selectedAttributes).map((attribute, index) =>
                                     <div style={attribute.includes('#')
                                         ? {backgroundColor: `${attribute}`} : null} key={index}>
                                         {attribute.includes('#') ? null : attribute}</div>)}
                         </div>
                     </div>
                     <div className="cart-element-amount">
-                        <div onClick={this.props.increaseAmount}><SvgSelector svgName="plus-square-icon"/></div>
-                        <div className="cart-product-amount">{this.props.productAmount[this.props.product.id]}</div>
-                        <div onClick={this.props.decreaseAmount}><SvgSelector svgName="minus-square-icon"/></div>
+                        <div onClick={increaseAmount}><SvgSelector svgName="plus-square-icon"/></div>
+                        <div className="cart-product-amount">{productAmount[product.id]}</div>
+                        <div onClick={decreaseAmount}><SvgSelector svgName="minus-square-icon"/></div>
                     </div>
-                    <SliderContainer product={this.props.product}
-                                     deleteProductHandler={this.props.deleteProductHandler}/>
-
+                    <SliderContainer product={product} deleteProductHandler={deleteProductHandler}/>
                 </div>
             </>
         )

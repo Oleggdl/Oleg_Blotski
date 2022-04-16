@@ -12,9 +12,7 @@ class ProductGalleryContainer extends Component {
     }
 
     sliderHandler(index) {
-
         this.setState({slideIndex: index + 1})
-
     }
 
     render() {

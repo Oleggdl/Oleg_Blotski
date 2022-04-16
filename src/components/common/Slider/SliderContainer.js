@@ -1,7 +1,5 @@
 import React, {Component} from 'react'
 import SliderComponent from "./SliderComponent"
-import {compose} from "redux"
-import {connect} from "react-redux"
 
 class SliderContainer extends Component {
 
@@ -41,11 +39,5 @@ class SliderContainer extends Component {
     }
 }
 
-const mapStateToProps = (state) => ({
-    currentCurrency: state.navbarReducer.currentCurrency
-})
-
-export default compose(
-    connect(mapStateToProps, {})
-)(SliderContainer)
+export default SliderContainer
 

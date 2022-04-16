@@ -40,12 +40,11 @@ export const getCategories = () => {
     return async dispatch => {
         client.query({
             query: gql`
-                    query categories {
-                     categories{
-                       name
-                     }
+                query categories {
+                    categories{
+                        name
                     }
-                    `
+                }`
         })
             .then(result => {
                 dispatch(getCategoriesActionCreator(result.data.categories))
@@ -60,6 +59,5 @@ export const setCurrentCategory = (currentCategory) => {
         dispatch(setCurrentCategoryActionCreator(currentCategory))
     }
 }
-
 
 export default categoryReducer

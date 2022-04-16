@@ -3,20 +3,26 @@ import './Navbar.scss'
 import SvgSelector from "../SvgSelector"
 import CartOverlayContainer from "../../CartOverlay/CartOverlayContainer"
 import {NavLink} from "react-router-dom"
+import CurrencyContainer from "../CurrencyOverlay/CurrencyContainer"
 
 class NavbarComponent extends Component {
 
-
     render() {
+
+        const {
+            categories, currentCategory, setCategory, currencyBtnRef, isCurrencyMenuHandler, currentCurrency,
+            isCurrencyMenu, currencyRef, cartBtnRef, cartContainer, isCartOverlay, onCartOverlayHandler, cart
+        } = this.props
+
         return (
             <>
                 <header className="header">
                     <nav className="category-nav">
                         <ul>
-                            {this.props.categories.map((category, index) =>
-                                <NavLink to="/" key={index} className={this.props.currentCategory === category.name
+                            {categories.map((category, index) =>
+                                <NavLink to="/" key={index} className={currentCategory === category.name
                                     ? 'category-link active-link' : 'category-link'}
-                                         onClick={() => this.props.setCategory(category.name)}>{category.name}
+                                         onClick={() => setCategory(category.name)}>{category.name}
                                 </NavLink>)}
                         </ul>
                     </nav>
@@ -24,32 +30,25 @@ class NavbarComponent extends Component {
                         <SvgSelector svgName="brand-icon"/>
                     </div>
                     <div className="header-actions">
-                        <div className="currency-icons" ref={this.props.currencyBtnRef}
-                             onClick={this.props.isCurrencyMenuHandler}>
-                            <span className="currency-icon">{this.props.currentCurrency.symbol}</span>
-                            <span className="arrow-icon">{!this.props.isCurrencyMenu
+                        <div className="currency-icons" ref={currencyBtnRef}
+                             onClick={isCurrencyMenuHandler}>
+                            <span className="currency-icon">{currentCurrency.symbol}</span>
+                            <span className="arrow-icon">{!isCurrencyMenu
                                 ? <SvgSelector svgName="arrow-down-icon"/>
                                 : <SvgSelector svgName="arrow-up-icon"/>}
                             </span>
                         </div>
-                        {this.props.isCurrencyMenu &&
-                            <div className="currencies-container" ref={this.props.currencyRef}>
-                                {this.props.currencies && this.props.currencies.map((currency, index) =>
-                                    <div key={index} onClick={() => this.props.currentCurrencyHandler(currency)}>
-                                        <span>{currency.symbol}</span>{currency.label}</div>)}
-                            </div>}
-                        <div className="cart-icon" ref={this.props.cartBtnRef}
-                             onClick={this.props.onCartOverlayHandler}>
+                        {isCurrencyMenu && <CurrencyContainer currencyRef={currencyRef}
+                                                              currencyBtnRef={currencyBtnRef}/>}
+                        <div className="cart-icon" ref={cartBtnRef}
+                             onClick={onCartOverlayHandler}>
                             <SvgSelector svgName="cart-icon"/>
-                            {this.props.cart.length !== 0
-                                ? <div className="cart-product-count">{this.props.cart.length}</div> : null}
+                            {cart.length !== 0 ? <div className="cart-product-count">{cart.length}</div> : null}
                         </div>
-
-                        {this.props.isCartOverlay && <CartOverlayContainer cartContainer={this.props.cartContainer}/>}
+                        {isCartOverlay && <CartOverlayContainer cartContainer={cartContainer} cartBtnRef={cartBtnRef}/>}
                     </div>
                 </header>
-                {this.props.isCartOverlay && <div className="cart-overlay-wrapper">
-                </div>}
+                {isCartOverlay && <div className="cart-overlay-wrapper"></div>}
             </>
         )
     }

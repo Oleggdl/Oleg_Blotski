@@ -1,0 +1,30 @@
+.currencies-container {
+  position: absolute;
+  z-index: 3;
+  top: 65px;
+  left: -16px;
+  width: 114px;
+  padding: 20px 0 0 0;
+  background-color: #ffffff;
+  box-shadow: 0 4px 35px 0 rgba(168, 172, 176, 0.19);
+
+  div {
+    margin-bottom: 21px;
+    padding: 4px 21px;
+    cursor: pointer;
+    transition: .3s;
+    font-weight: 500;
+    font-size: 18px;
+    color: #1d1f22;
+
+    span {
+      padding-right: 5px;
+    }
+
+    &:hover {
+      font-weight: 700;
+      background-color: #5ece7b;
+      color: #ffffff;
+    }
+  }
+}

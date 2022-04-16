@@ -19,7 +19,7 @@ class CategoryPageContainer extends Component {
     render() {
         return (
             <>
-                <CategoryPageComponent products={this.props.products} isCartOverlay={this.props.isCartOverlay}/>
+                <CategoryPageComponent products={this.props.products}/>
             </>
         )
     }
@@ -27,7 +27,6 @@ class CategoryPageContainer extends Component {
 
 const mapStateToProps = (state) => ({
     products: state.productReducer.products,
-    isCartOverlay: state.navbarReducer.isCartOverlay,
     currentCategory: state.categoryReducer.currentCategory
 })
 

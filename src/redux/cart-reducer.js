@@ -36,7 +36,6 @@ const cartReducer = (state = initialState, action) => {
     }
 }
 
-
 export const addProductToCartActionCreator = (product, attributes, isInCart) =>
     ({type: ADD_PRODUCT_TO_CART, product, attributes, isInCart})
 export const setTotalAmountActionCreator = totalAmount => ({type: SET_TOTAL_AMOUNT, totalAmount})
@@ -62,6 +61,5 @@ export const deleteProductFromCart = (cart) => {
         dispatch(deleteProductFromCartActionCreator(cart))
     }
 }
-
 
 export default cartReducer
