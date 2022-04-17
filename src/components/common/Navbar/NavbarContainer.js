@@ -23,6 +23,16 @@ class NavbarContainer extends Component {
         this.props.getCurrencies()
     }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.cart !== prevProps.cart) {
+            window.sessionStorage.setItem('cart', JSON.stringify(this.props.cart))
+        }
+        if (this.props.currentCurrency !== prevProps.currentCurrency) {
+            console.log(this.props.currentCurrency, prevProps.currentCurrency)
+            window.sessionStorage.setItem('currentCurrency', JSON.stringify(this.props.currentCurrency))
+        }
+    }
+
     setCategory = (value) => {
         this.props.getProducts(value)
         this.props.setCurrentCategory(value)

@@ -83,7 +83,8 @@ export const getCurrencies = () => {
         })
             .then(result => {
                 dispatch(getCurrenciesActionCreator(result.data.currencies))
-                dispatch(setCurrentCurrencyActionCreator(result.data.currencies[0]))
+                dispatch(setCurrentCurrencyActionCreator(JSON.parse(window.sessionStorage.getItem('currentCurrency'))
+                    ? JSON.parse(window.sessionStorage.getItem('currentCurrency')) : result.data.currencies[0]))
             })
 
     }
