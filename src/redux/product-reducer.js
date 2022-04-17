@@ -10,7 +10,8 @@ const UNSET_PRODUCT_AMOUNT = 'UNSET_PRODUCT_AMOUNT'
 let initialState = {
     products: [],
     currentProduct: JSON.parse(window.sessionStorage.getItem('currentProduct')),
-    productAmount: {},
+    productAmount: JSON.parse(window.sessionStorage.getItem('productAmount'))
+        ? JSON.parse(window.sessionStorage.getItem('productAmount')) : {},
     attributes: {}
 }
 

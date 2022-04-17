@@ -28,8 +28,7 @@ class NavbarContainer extends Component {
             window.sessionStorage.setItem('cart', JSON.stringify(this.props.cart))
         }
         if (this.props.currentCurrency !== prevProps.currentCurrency) {
-            console.log(this.props.currentCurrency, prevProps.currentCurrency)
-            window.sessionStorage.setItem('currentCurrency', JSON.stringify(this.props.currentCurrency))
+            window.localStorage.setItem('currentCurrency', JSON.stringify(this.props.currentCurrency))
         }
     }
 

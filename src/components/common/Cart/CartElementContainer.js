@@ -42,6 +42,10 @@ class CartElementContainer extends Component {
                 }
             }
         }
+
+        if (this.props.productAmount !== prevProps.productAmount) {
+            window.sessionStorage.setItem('productAmount', JSON.stringify(this.props.productAmount))
+        }
     }
 
     deleteProductHandler() {
